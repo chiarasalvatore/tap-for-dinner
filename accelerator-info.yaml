@@ -1,0 +1,39 @@
+id: 65de2b02-315a-4bf0-aff7-eccd2e855cb7
+timestamp: 2023-09-17T11:50:29Z
+username: guest
+source: TAP-GUI
+accelerator:
+  name: where-for-dinner
+  source:
+    image: europe-docker.pkg.dev/tap-sandbox-dev/tap-bits/tap-packages@sha256:49c55504f27f5ce3d411a8ad572349ee11be98395e15ed750017bc88c942a943
+fragments:
+  - name: build-wrapper-maven
+    source:
+      image: europe-docker.pkg.dev/tap-sandbox-dev/tap-bits/tap-packages@sha256:195a3ca6585fa91c41292584a19c2807c72ecdf986ce860a7147451e89d467d4
+  - name: tap-workload
+    source:
+      image: europe-docker.pkg.dev/tap-sandbox-dev/tap-bits/tap-packages@sha256:d9c7d8d322f0740666ba7c752a9174d1eb66274338c4f0e211edb1d448104c2a
+options:
+  appSSOName: appsso-where-for-dinner
+  appWorkloadURL: http://where-for-dinner-this-is-a-demo
+  cacheName: cache-where-for-dinner
+  cacheType: inmemCache
+  dbType: h2
+  devDefaultAccountPassword: letseat
+  devDefaultAccountUsername: where-for-dinner
+  dynamicCache: false
+  dynamicMsgBroker: true
+  dynamicMsgBrokerClass: msgbroker-crossplane-where-for-dinner
+  enableCloudEvents: false
+  enableDefaultDevAccount: true
+  enableSecurity: false
+  gatewayName: gateway-where-for-dinner
+  gatewayType: tapscg
+  includeBuildToolWrapper: true
+  msgBrokerType: rabbitmq
+  msgbrokerName: msgbroker-where-for-dinner
+  numRabbitMQClusterNodes: 1
+  ployglotWorkloads: false
+  projectName: where-for-dinner
+  serviceNamespace: service-instances
+  workloadNamespace: workloads
