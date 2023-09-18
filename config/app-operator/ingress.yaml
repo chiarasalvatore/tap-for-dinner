@@ -5,7 +5,7 @@ metadata:
   namespace: workloads
 spec:
   virtualhost:
-    fqdn: where-for-dinner-this-is-a-demo
+    fqdn: where-for-dinner.chiara-demo.dev
   routes:
   - conditions:
     - prefix: /

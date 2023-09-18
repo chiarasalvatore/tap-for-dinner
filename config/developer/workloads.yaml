@@ -1,6 +1,43 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
+  name: where-for-dinner
+  namespace: workloads
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: where-for-dinner-api-gateway
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    apps.tanzu.vmware.com/has-tests: "true"
+spec:
+  env: null
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+      autoscaling.knative.dev/target: "200"
+      autoscaling.knative.dev/maxScale: "4"
+  serviceClaims: null
+  resources:
+    requests:
+      memory: 500M
+      cpu: 100m
+    limits:
+      memory: 750M
+      cpu: 1500m
+  build:
+    env:
+    - name: BP_JVM_VERSION
+      value: "17"
+  source:
+    git:
+      url: https://github.com/chiarasalvatore/tap-for-dinner
+      ref:
+        branch: main
+    subPath: where-for-dinner-api-gateway
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
   name: where-for-dinner-search
   namespace: workloads
   labels:
@@ -47,7 +84,7 @@ spec:
       value: "17"
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-search
@@ -92,7 +129,7 @@ spec:
       cpu: 1500m
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-search-proc
@@ -137,7 +174,7 @@ spec:
       cpu: 1500m
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-notify
@@ -191,7 +228,7 @@ spec:
       cpu: "1.5"
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-availability
@@ -229,7 +266,7 @@ spec:
       cpu: 1500m
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-ui
@@ -264,7 +301,7 @@ spec:
       value: "17"
   source:
     git:
-      url: <https URL for your generated project's Git repository>
+      url: https://github.com/chiarasalvatore/tap-for-dinner
       ref:
         branch: main
     subPath: where-for-dinner-crawler
